@@ -1,7 +1,11 @@
 import puppeteer from "puppeteer";
 
-export async function screenshotPost(url) {
-  const browser = await puppeteer.launch({ headless: "new" });
+export async function screenshotPost(url, rating) {
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+
   const page = await browser.newPage();
 
   // Navigate to the 4chan thread with the specific post
@@ -34,7 +38,7 @@ export async function screenshotPost(url) {
   const postElement = await page.$(postSelector);
   if (postElement) {
     await postElement.screenshot({
-      path: `puppeteer/screenshots/screenshot_${postId}.png`,
+      path: `puppeteer/screenshots/screenshot_${rating}_${postId}.png`,
     });
     console.log(`✅ Screenshot saved: screenshot_${postId}.png`);
   } else {

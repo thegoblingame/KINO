@@ -32,12 +32,14 @@ export function getPopularPosts(posts, threadReplyCount, board, threadId) {
       postReplyCount,
       board: board,
       threadId: threadId,
+      // # of replies to the post divided by # of posts in the thread. so lower = better. increment by 1 to avoid dividing by 0
+      roughRating: threadReplyCount / postReplyCount + 1,
     };
     // console.log(popularPost);
     allPosts.push(popularPost);
   }
   const popularPosts = allPosts.filter((post) => {
-    return threadReplyCount / post.postReplyCount + 1 < 10;
+    return post.roughRating < 25;
   });
   return popularPosts;
 }
