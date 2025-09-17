@@ -2,7 +2,7 @@ import puppeteer from "puppeteer";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-export async function screenshotPost(url, rating) {
+export async function screenshotPost(url, board, rating) {
   const browser = await puppeteer.launch({
     headless: "new",
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -45,7 +45,10 @@ export async function screenshotPost(url, rating) {
   // Take a screenshot of just the post
   const postElement = await page.$(postSelector);
   if (postElement) {
-    const filePath = path.join(outDir, `screenshot_${rating}_${postId}.png`);
+    const filePath = path.join(
+      outDir,
+      `screenshot_${board}_${rating}_${postId}.png`
+    );
     await postElement.screenshot({ path: filePath });
     console.log(`✅ Screenshot saved: ${filePath}`);
   } else {

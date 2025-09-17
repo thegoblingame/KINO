@@ -42,7 +42,7 @@ for (const post of popularPosts) {
   await new Promise((res) => setTimeout(res, 1100));
   try {
     const url = `https://boards.4chan.org/${post.board}/thread/${post.threadId}#p${post.ID}`;
-    await screenshotPost(url, post.roughRating);
+    await screenshotPost(url, post.board, post.roughRating);
   } catch (error) {
     console.error(error);
   }
