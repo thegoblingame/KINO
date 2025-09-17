@@ -2,7 +2,7 @@ import { getLongThreads } from "./getLongThreads.js";
 import { getPopularPosts } from "./getPopularPosts.js";
 import { screenshotPost } from "../puppeteer/screenshotPost.js";
 
-const targetedBoards = ["v", "tv", "mu", "g", "r9k", "x", "fit", "ck"];
+const targetedBoards = ["v", "tv", "g", "r9k", "x", "fit", "lit", "biz", "adv"];
 // const targetedBoards = ["fit"];
 const longThreads = [];
 const popularPosts = [];
