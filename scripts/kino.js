@@ -2,10 +2,11 @@ import { getLongThreads } from "./getLongThreads.js";
 import { getPopularPosts } from "./getPopularPosts.js";
 import { screenshotPost } from "../puppeteer/screenshotPost.js";
 
-const targetedBoards = ["v", "tv", "g", "r9k", "x", "fit", "lit", "biz", "adv"];
-// const targetedBoards = ["fit"];
+const targetedBoards = process.argv.slice(2);
 const longThreads = [];
 const popularPosts = [];
+// # of replies to the post divided by # of posts in the thread. so lower = better
+const targetRating = 25;
 
 for (const board of targetedBoards) {
   longThreads.push(...(await getLongThreads(board)));
@@ -23,14 +24,7 @@ for (const thread of longThreads) {
       throw new Error(`request failed ${resp.status}, this is the url ${url}`);
     }
     const data = await resp.json();
-    popularPosts.push(
-      ...getPopularPosts(
-        data.posts,
-        thread.threadReplyCount,
-        thread.board,
-        thread.threadId
-      )
-    );
+    popularPosts.push(...getPopularPosts(data.posts, thread, targetRating));
   } catch (error) {
     console.error(error);
   }

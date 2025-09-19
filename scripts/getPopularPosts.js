@@ -1,4 +1,4 @@
-export function getPopularPosts(posts, threadReplyCount, board, threadId) {
+export function getPopularPosts(posts, thread, targetRating) {
   const allPosts = [];
   const OPRemovedClone = structuredClone(posts);
   OPRemovedClone.shift();
@@ -30,16 +30,16 @@ export function getPopularPosts(posts, threadReplyCount, board, threadId) {
     const popularPost = {
       ID: parseInt(ID),
       postReplyCount,
-      board: board,
-      threadId: threadId,
+      board: thread.board,
+      threadId: thread.threadId,
       // # of replies to the post divided by # of posts in the thread. so lower = better. increment by 1 to avoid dividing by 0
-      roughRating: threadReplyCount / postReplyCount + 1,
+      roughRating: thread.threadReplyCount / postReplyCount + 1,
     };
     // console.log(popularPost);
     allPosts.push(popularPost);
   }
   const popularPosts = allPosts.filter((post) => {
-    return post.roughRating < 25;
+    return post.roughRating < targetRating;
   });
   return popularPosts;
 }

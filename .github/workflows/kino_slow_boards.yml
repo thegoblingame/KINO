@@ -1,8 +1,8 @@
-name: kino-screenshots
+name: kino-slow
 
 on:
   schedule:
-    - cron: "0 9,18 * * *"
+    - cron: "0 13 * * *"
   workflow_dispatch: {} # manual run button
 
 permissions:
@@ -44,7 +44,7 @@ jobs:
           # R2_BUCKET: ${{ secrets.R2_BUCKET }}
           NODE_ENV: production
         run: |
-          node scripts/kino.js
+          node scripts/kino.js g x fit lit biz adv
 
       - name: upload screenshots artifact
         if: always()
