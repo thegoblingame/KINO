@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: kino-screenshots
+  group: kino-screenshots-fast
   cancel-in-progress: false
 
 jobs:
@@ -21,14 +21,19 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
+      - name: setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
       - name: setup node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "npm"
+          cache: pnpm
 
       - name: install deps
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       # optional: puppeteer likes these flags in ci; if you already add them in code, remove this step
       - name: write ci env
@@ -37,11 +42,6 @@ jobs:
 
       - name: run coordinator
         env:
-          # put any secrets you need here later (api keys, etc)
-          # R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
-          # R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          # R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          # R2_BUCKET: ${{ secrets.R2_BUCKET }}
           NODE_ENV: production
         run: |
           node scripts/kino.js v tv r9k
@@ -50,7 +50,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: screenshots-${{ github.run_number }}
+          name: screenshots-fast-${{ github.run_number }}
           path: |
             puppeteer/screenshots/**/*
           if-no-files-found: ignore
