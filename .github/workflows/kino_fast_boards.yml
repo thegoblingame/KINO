@@ -32,17 +32,19 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      # install system chrome for puppeteer
+      - name: setup chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: install deps
         run: pnpm install --frozen-lockfile
-
-      # optional: puppeteer likes these flags in ci; if you already add them in code, remove this step
-      - name: write ci env
-        run: |
-          echo "PUPPETEER_SKIP_DOWNLOAD=" >> $GITHUB_ENV
 
       - name: run coordinator
         env:
           NODE_ENV: production
+          # pass the chrome binary path to puppeteer
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.chrome.outputs.chrome-path }}
         run: |
           node scripts/kino.js v tv r9k
 
