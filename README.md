@@ -1,3 +1,5 @@
+# THIS PROJECT USES PNPM INSTEAD OF NPM
+
 - frontend with all posts, separated by date
 - makes API request to r2 as in gladaitor?
 - user can click on posts if the thread is active
