@@ -1,7 +1,0 @@
-name = "kino-worker"
-main = "kino-worker\src\index.js"
-compatibility_date = "2025-09-22"
-
-[[r2_buckets]]
-binding = "KINO_BUCKET"
-bucket_name = "kino"

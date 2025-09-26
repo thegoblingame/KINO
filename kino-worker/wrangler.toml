@@ -1,0 +1,11 @@
+name = "kino-worker"
+main = "src/index.js"
+compatibility_date = "2025-09-17"
+
+[[r2_buckets]]
+binding = "KINO_BUCKET"
+bucket_name = "kino"
+
+[vars]
+ACCOUNT_ID = "bc4b6b4f3d133a0cf0bf7a1cad330f99"
+PUBLIC_ASSETS_BASE = "https://screenshots.4kino.org"

@@ -46,7 +46,7 @@ jobs:
           # pass the chrome binary path to puppeteer
           PUPPETEER_EXECUTABLE_PATH: ${{ steps.chrome.outputs.chrome-path }}
         run: |
-          node scripts/kino.js g x fit lit biz adv
+          node scripts/kino.js g x fit biz adv
 
       - name: upload screenshots artifact
         if: always()
