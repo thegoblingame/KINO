@@ -16,7 +16,6 @@ export default function Loading() {
         // height={500}
         className="loading-image"
       />
-      <p className="loading-text">loading</p>
 
       <style jsx>{`
         .loading-container {

@@ -13,7 +13,15 @@ export async function screenshotPost(url, board, rating) {
     return `${y}-${m}-${day}T${hh}-${mm}-${ss}Z`;
   }
 
+  // function datePrefixUTC(d = new Date()) {
+  //   const y = d.getUTCFullYear();
+  //   const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+  //   const day = String(d.getUTCDate()).padStart(2, "0");
+  //   return `${y}-${m}-${day}`; // e.g. 2025-09-25
+  // }
+
   const currentDate = tsPrefixUTC();
+  // const currentDate = datePrefixUTC();
 
   const browser = await puppeteer.launch({
     headless: "new",
