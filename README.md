@@ -9,5 +9,5 @@
 
 - see if we can get images gifts and webms
 
-v tv r9k
-g x fit biz adv
+v tv
+g x fit
